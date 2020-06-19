@@ -1,0 +1,30 @@
+{
+  "name": "boilerplate-typescript-nodejs",
+  "version": "1.0.0",
+  "description": "Template for NodeJS/ExpressJs projects for backend development using Typescript",
+  "main": "./build/app.js",
+  "scripts": {
+    "test": "mocha --timeout 150000 --reporter mochawesome",
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "start": "node ./build/app.js",
+    "prod:start": "tsc && forever start ./build/app.js",
+    "prod:restart": "tsc && forever restart ./build/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nferocious76/NodeJSTypeScriptBoilerPlate.git"
+  },
+  "keywords": [
+    "typescript",
+    "boilerplate",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "Neil Francis Ramirez Hipona",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nferocious76/NodeJSTypeScriptBoilerPlate/issues"
+  },
+  "homepage": "https://github.com/nferocious76/NodeJSTypeScriptBoilerPlate#readme"
+}
