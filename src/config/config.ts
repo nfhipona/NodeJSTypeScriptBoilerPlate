@@ -8,6 +8,7 @@ import { KeyValue } from '../lib/interface';
 import { parseEnvConfig } from '../helper/helper';
 
 const env = process.env;
+console.log(`\nEnvironment: ${env.NODE_ENV || 'development'}`);
 
 const serverConfig: KeyValue        = parseEnvConfig(env.SERVER_CONFIG || '');
 const jwtConfig: KeyValue           = parseEnvConfig(env.JWT_CONFIG || '');
@@ -22,6 +23,8 @@ const staging: KeyValue             = parseEnvConfig(env.STAGING_ENV || '');
 const production: KeyValue          = parseEnvConfig(env.PRODUCTION_ENV || '');
 
 const certConfig: KeyValue          = parseEnvConfig(env.SSL_CERTIFICATE || '');
+
+const cors: KeyValue                = parseEnvConfig(env.CORS || '');
 
 /**
  * Configuration for handling redirects
@@ -46,12 +49,12 @@ let key: any, cert: any;
 try {
     fs.readFileSync(path.resolve(`${certConfig.path}/${certConfig.key}`));
 } catch (err) {
-    console.log(`\nServer SSL key not found: ${certConfig.key}`);
+    console.log(`Server SSL key not found: ${certConfig.key}`);
 }
 try {
     fs.readFileSync(path.resolve(`${certConfig.path}/${certConfig.cert}`));
 } catch (err) {
-    console.log(`\nServer SSL cert not found: ${certConfig.cert}`);
+    console.log(`Server SSL cert not found: ${certConfig.cert}`);
 }
 
 const certificate: KeyValue = (key && cert) ? { key, cert } : {};
@@ -69,5 +72,7 @@ export default {
 
     bcryptConfig,
 
-    certificate
+    certificate,
+
+    cors
 }
