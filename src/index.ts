@@ -4,6 +4,8 @@ import express from 'express';
 import parser from 'body-parser';
 import http from 'http';
 import https from 'https';
+import morgan from 'morgan';
+
 import { send200 } from './helper/helper';
 import { serverConfig, certificate } from './config/config'
 
@@ -20,6 +22,7 @@ function appServer(): express.Application {
 
     app.use(parser.json());
     app.use(parser.urlencoded({ extended: true }));
+    app.use(morgan('dev'));
 
     // add routers
 

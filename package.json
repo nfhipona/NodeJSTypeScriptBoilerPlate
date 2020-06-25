@@ -29,9 +29,11 @@
   "homepage": "https://github.com/nferocious76/NodeJSTypeScriptBoilerPlate#readme",
   "dependencies": {
     "@types/express": "^4.17.6",
+    "@types/morgan": "^1.9.1",
     "@types/redis": "^2.8.22",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "redis": "^3.0.2"
   },
   "devDependencies": {
