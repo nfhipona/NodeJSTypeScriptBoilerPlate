@@ -107,7 +107,7 @@ const compareStr = (str1: string, str2: string) => {
 
 /** RESPONSE HANDLER */
 
-const send200 = (res: Response, data: any, message: string) => {
+const send200 = (res: Response, data: any, message: string = '') => {
     
     const responseData = constructSuccessData(message, data);
 

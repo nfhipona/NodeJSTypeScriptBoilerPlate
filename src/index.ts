@@ -5,6 +5,7 @@ import parser = require('body-parser');
 import http = require('http');
 import https = require('https');
 
+import { send200 } from './helper/helper';
 import config from './config/config'
 
 const pjson = require('../package.json');
@@ -23,13 +24,26 @@ function appServer(): express.Application {
 
     // add routers
 
+    /**
+     * @api {get} / Server information
+     * @apiName GetServerInfo
+     * @apiGroup Server
+     */
+    app.get('/', (req, res) => {
+
+        const info = {
+            version: pjson.version,
+            docs: 'https://documenter.getpostman.com/view/docs'
+        };
+
+        send200(res, info, 'Welcome to boilerplate API');
+    });
+
     // handles unknown routes
     app.all('*', (req, res, next) => {
 
         if (req.method !== 'OPTIONS') {
-            res
-                .status(404)
-                .send({ message: 'Nothing to do here.' });
+            send200(res, {}, 'Nothing to do here.');
         }
 
         next();
