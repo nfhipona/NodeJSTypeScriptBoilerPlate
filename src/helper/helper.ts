@@ -1,6 +1,7 @@
 'use strict';
 
 import { KeyValue } from '../lib/interface';
+import e from 'express';
 
 /** ENV PARSER */
 
@@ -14,9 +15,21 @@ const parseEnvConfig = (settingsStr: string): KeyValue => {
     for (const component of settingsComponent) {
         const subComponents: string[] = component.split('::');
         const key: string = subComponents[0];
-        const value: string = subComponents[1];
+        const value: string = subComponents[1] || '';
 
-        settings[key] = isBoolean(value) ? boolValue(value) : isNanConvert(value);
+        if (value.includes(',')) {
+            let arrayValues: string[] = [];
+            const arrayComponents: string[] = value.split(',');
+
+            for (const val of arrayComponents) {
+                const valTmp = isBoolean(val) ? boolValue(val) : isNanConvert(val);
+                arrayValues.push(valTmp);
+            }
+
+            settings[key] = arrayValues;
+        }else{
+            settings[key] = isBoolean(value) ? boolValue(value) : isNanConvert(value);
+        }
     }
 
     return settings;
