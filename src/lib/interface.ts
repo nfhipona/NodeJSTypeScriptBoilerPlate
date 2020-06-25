@@ -1,5 +1,3 @@
 'use strict';
 
-export class KeyValue implements Object {
-    [key: string]: any
-};
+export class KeyValue implements Object { [key: string]: any; };

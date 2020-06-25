@@ -1,7 +1,6 @@
 'use strict';
 
 import { KeyValue } from '../lib/interface';
-import e from 'express';
 
 /** ENV PARSER */
 
