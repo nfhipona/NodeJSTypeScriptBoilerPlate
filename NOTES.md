@@ -27,6 +27,41 @@ PRODUCTION_ENV=web::https://yourdomain.com&api::https://api.yourdomain.com
 
 SSL_CERTIFICATE=key::KEY_FILENAME&cert=CERT_FILENAME&path=PATH_TO_FILE
 
+// should be an in-line value
+CORS=allow_credentials::true
+    &hosts::127.0.0.1,localhost,yourwebsite.com
+    &origins::127.0.0.1,localhost,yourwebsite.com
+    &methods::DELETE,PUT,GET,POST,OPTIONS
+    &headers::Content-Type,Accept,x-access-token,Lang
+
+```Sample CORS output
+{
+    allow_credentials: true,
+    hosts: [
+        '127.0.0.1',
+        'localhost',
+        'yourwebsite.com',
+    ],
+    origins: [
+        '127.0.0.1',
+        'localhost',
+        'yourwebsite.com'
+    ],
+    methods: [
+        'DELETE',
+        'PUT',
+        'GET',
+        'POST',
+        'OPTIONS'
+    ],
+    headers: [
+        'Content-Type',
+        'Accept',
+        'x-access-token',
+        'Lang'
+    ]
+}
+```
 ## License
 
 SAMS API is available under the MIT license. See the [LICENSE](https://bitbucket.org/nferocious76/sams-api/src/master/LICENSE) file for more info.
