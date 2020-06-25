@@ -49,10 +49,52 @@ const combineObject = (object: KeyValue, toObject: KeyValue): KeyValue => {
     return toObject;
 }
 
+/** GENERATORS */
+
+const randString = (length: number): string => {
+
+	let randString: string = "";
+	let possible: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+
+	for (let i = 0; i < length; i++) {
+		randString += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+
+	return randString;
+}
+
+const randChar = (length: number): string => {
+
+	let randChar: string = "";
+	let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+	for (let i = 0; i < length; i++) {
+		randChar += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+
+	return randChar;
+}
+
+const randNumber = (length: number): string => {
+
+	let randNumber: string = "";
+	let possible = "0123456789";
+
+	for (let i = 0; i < length; i++) {
+		randNumber += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+
+	return randNumber;
+}
+
 export {
     parseEnvConfig,
     isBoolean,
     boolValue,
     isNanConvert,
-    combineObject
+    combineObject,
+    
+    randString,
+    randChar,
+    randNumber
 }
