@@ -1,10 +1,9 @@
 'use strict';
 
-import express = require('express');
-import parser = require('body-parser');
-import http = require('http');
-import https = require('https');
-
+import express from 'express';
+import parser from 'body-parser';
+import http from 'http';
+import https from 'https';
 import { send200 } from './helper/helper';
 import { serverConfig, certificate } from './config/config'
 

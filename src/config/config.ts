@@ -1,9 +1,9 @@
 'use strict';
 
-                    require('dotenv').config();
-const fs            = require('fs');
-const path          = require('path');
-
+    require('dotenv').config();
+    
+import fs from 'fs';
+import path from 'path';
 import { KeyValue } from '../lib/interface';
 import { parseEnvConfig } from '../helper/helper';
 
