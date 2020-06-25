@@ -9,7 +9,7 @@ const SERVER_MAINTENANCE: string    = 'Maintenance: Server is undergoing service
 const UNAUTHORIZED_REQUEST: string  = 'Unauthorized request';
 const DATABASE_CONN_ERROR: string   = 'Connection error';
 
-export default {
+export {
     PERMISSION_DENIED,
     FORBIDDEN_REQUEST,
     SERVICE_UNAVAILABLE,
