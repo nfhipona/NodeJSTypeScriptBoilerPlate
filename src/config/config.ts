@@ -59,7 +59,7 @@ try {
 
 const certificate: KeyValue = (key && cert) ? { key, cert } : {};
 
-export default {
+export {
     serverConfig,
     jwtConfig,
     socketConfig,

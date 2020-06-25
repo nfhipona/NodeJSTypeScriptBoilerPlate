@@ -6,14 +6,14 @@ import http = require('http');
 import https = require('https');
 
 import { send200 } from './helper/helper';
-import config from './config/config'
+import { serverConfig, certificate } from './config/config'
 
 const pjson = require('../package.json');
 
 function appServer(): express.Application {
 
-    const serverConf = config.serverConfig;
-    const cert = config.certificate;
+    const serverConf = serverConfig;
+    const cert = certificate;
     const hasSSLCert = cert.key && cert.cert;
 
     const app: express.Application = express();
