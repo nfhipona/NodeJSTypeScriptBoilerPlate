@@ -1,5 +1,6 @@
 'use strict';
 
+import { Response, NextFunction } from 'express';
 import { KeyValue } from '../lib/interface';
 
 /** ENV PARSER */
@@ -99,6 +100,137 @@ const randNumber = (length: number): string => {
 	return randNumber;
 }
 
+const compareStr = (str1: string, str2: string) => {
+
+    return str1.toLowerCase() === str2.toLowerCase();
+}
+
+/** RESPONSE HANDLER */
+
+const send200 = (res: Response, data: any, message: string) => {
+    
+    const responseData = constructSuccessData(message, data);
+
+	sendResponse(res, 200, responseData);
+}
+
+const send400 = (res: Response, err: Error, message: string) => {
+    
+    const error_data = checkError(err);
+    const responseData = constructErrorData(message, error_data);
+
+	sendResponse(res, 400, responseData);
+}
+
+const send401 = (res: Response, err: Error, message: string) => {
+
+    const error_data = checkError(err);
+    const responseData = constructErrorData(message, error_data);
+
+	sendResponse(res, 401, responseData);
+}
+
+const send403 = (res: Response, err: Error, message: string) => {
+
+    const error_data = checkError(err);
+    const responseData = constructErrorData(message, error_data);
+
+	sendResponse(res, 403, responseData);
+}
+
+const send404 = (res: Response, err: Error, message: string) => {
+
+    const error_data = checkError(err);
+    const responseData = constructErrorData(message, error_data);
+
+	sendResponse(res, 404, responseData);
+}
+
+const send500 = (res: Response, err: Error, message: string) => {
+
+    const error_data = checkError(err);
+    const responseData = constructErrorData(message, error_data);
+
+	sendResponse(res, 500, responseData);
+}
+
+const send503 = (res: Response, err: Error, message: string) => {
+
+    const error_data = checkError(err);
+    const responseData = constructErrorData(message, error_data);
+
+	sendResponse(res, 503, responseData);
+}
+
+const constructErrorData = (context: string, data: any) => {
+    if (!data && context) console.log(`Error message: `, context);
+
+    return responseData(false, context, data);
+};
+
+const constructSuccessData = (context: string, data: any) => {
+
+    return responseData(true, context, data);
+}
+
+const responseData = (success: boolean, context: string, data: any) => {
+
+    const response_data = {
+        success: success,
+        message: context,
+        data: data
+    };
+
+    return response_data;
+}
+
+const sendResponse = (res: Response, code: number, data: any) => {
+
+    res
+        .status(code)
+        .send(data);
+}
+
+/** ERROR HANDLER */
+
+const checkError = (err: any) => {
+    console.log('\nError: ', err);
+
+    if (err && err.code) {
+        const code = err.code.toString();
+
+        if (code === 'ER_BAD_FIELD_ERROR' ||
+            code === 'ER_WRONG_VALUE_COUNT_ON_ROW' ||
+            code === 'ER_NO_SUCH_TABLE' ||
+            code === 'ER_WRONG_TABLE_NAME' ||
+            code === 'ER_ACCESS_DENIED_ERROR' ||
+            code === 'ER_NO_REFERENCED_ROW_2' ||
+            code === 'ER_DATA_TOO_LONG') {
+
+            return { message: 'Bad parameters.' };
+
+        } else if (code === 'ER_DUP_ENTRY') {
+            return { message: 'Duplicate entry' }; // err.sqlMessae
+
+        } else if (code === 'ECONNREFUSED') {
+            return { message: 'Server connection error.' };
+
+        } else if (code === 'ER_PARSE_ERROR' ||
+            code === 'ER_WRONG_NUMBER_OF_COLUMNS_IN_SELECT' ||
+            code === 'ER_NON_UNIQ_ERROR' ||
+            code === 'ER_LOCK_WAIT_TIMEOUT' ||
+            code === 'PROTOCOL_SEQUENCE_TIMEOUT') {
+
+            return { message: 'Server error.' };
+        } else if (err.sql) {
+            return { message: 'Server error.' };
+        }
+    }
+
+    return err;
+};
+
+
 export {
     parseEnvConfig,
     isBoolean,
@@ -108,5 +240,15 @@ export {
     
     randString,
     randChar,
-    randNumber
+    randNumber,
+
+    compareStr,
+
+    send200,
+    send400,
+    send401,
+    send403,
+    send404,
+    send500,
+    send503
 }
