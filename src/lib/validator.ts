@@ -1,7 +1,6 @@
 'use strict';
 
 import { KeyValue, Prop, FormData } from './interface';
-import { strict } from 'assert';
 
 /**
  * 

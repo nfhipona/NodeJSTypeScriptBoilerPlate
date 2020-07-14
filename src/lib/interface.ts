@@ -42,6 +42,7 @@ export class Prop {
     }
 }
 
+/** Used by validator.ts */
 export class FormData {
 
     source: any;
